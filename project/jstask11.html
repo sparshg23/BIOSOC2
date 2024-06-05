@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AUDIO USING JS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            gap: 35px;
+            border: 2px solid red;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        .box {
+            border: 2px solid rgb(212, 10, 222);
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            z-index: 1;
+            width: 12vw;
+            height: 12vh;
+            gap: 20px;
+            transition: all 0.002s;
+
+        }
+        .start {
+            transform: rotate(30deg);
+            border-color: yellow;
+            border-radius: 12px;
+            box-shadow: yellow;
+        }
+        text {
+            text-align: center;
+            align-self: center;
+        }
+        span {
+            align-self: center;
+            text-align: end;
+        }
+        img {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="P10.jpg" alt="Background Image">
+        <div class="box" data-key="81">
+            <text>Q</text>
+            <span>CLAP</span>
+        </div>
+        <div class="box" data-key="87">
+            <text>W</text>
+            <span>DRUM</span>
+        </div>
+        <div class="box" data-key="69">
+            <text>E</text>
+            <span>VIOLIN</span>
+        </div>
+        <div class="box" data-key="82">
+            <text>R</text>
+            <span>BOOM</span>
+        </div>
+        <div class="box" data-key="84">
+            <text>T</text>
+            <span>TOKYO</span>
+        </div>
+        <div class="box" data-key="89">
+            <text>Y</text>
+            <span>DISTORTED</span>
+        </div>
+    </div>
+    <audio data-key="81" src="clap.wav"></audio>
+    <audio data-key="87" src="drum.wav"></audio>
+    <audio data-key="69" src="Violin.wav"></audio>
+    <audio data-key="82" src="boom.wav"></audio>
+    <audio data-key="84" src="tokyo.wav"></audio>
+    <audio data-key="89" src="distorted.wav"></audio>
+
+    <script>
+        window.addEventListener('keydown', function(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const box = document.querySelector(`.box[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+
+            audio.currentTime = 0;
+            audio.play();
+
+            box.classList.add('start');
+            setTimeout(() => {
+                box.classList.remove('start');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
